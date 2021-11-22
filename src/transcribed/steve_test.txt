@@ -1,0 +1,26 @@
+[0] Traceback (most recent call last):
+[1]   File "C:\Users\Joseph Shimonov\Desktop\Java Projects\MyScribe\src\main.py", line 65, in <module>
+[2]     main()
+[3]   File "C:\Users\Joseph Shimonov\Desktop\Java Projects\MyScribe\src\main.py", line 11, in main
+[4]     upload_blob(bucket_name='speech-to-text-media-scribes', source_file_name=file, destination_blob_name=dest_blob_name)
+[5]   File "C:\Users\Joseph Shimonov\Desktop\Java Projects\MyScribe\src\main.py", line 56, in upload_blob
+[6]     storage_client = storage.Client()
+[7]   File "C:\Users\Joseph Shimonov\AppData\Roaming\Python\Python39\site-packages\google\cloud\storage\client.py", line 124, in __init__
+[8]     super(Client, self).__init__(
+[9]   File "C:\Users\Joseph Shimonov\AppData\Roaming\Python\Python39\site-packages\google\cloud\client\__init__.py", line 318, in __init__
+[10]     _ClientProjectMixin.__init__(self, project=project, credentials=credentials)
+[11]   File "C:\Users\Joseph Shimonov\AppData\Roaming\Python\Python39\site-packages\google\cloud\client\__init__.py", line 266, in __init__
+[12]     project = self._determine_default(project)
+[13]   File "C:\Users\Joseph Shimonov\AppData\Roaming\Python\Python39\site-packages\google\cloud\client\__init__.py", line 285, in _determine_default
+[14]     return _determine_default_project(project)
+[15]   File "C:\Users\Joseph Shimonov\AppData\Roaming\Python\Python39\site-packages\google\cloud\_helpers\__init__.py", line 154, in _determine_default_project
+[16]     _, project = google.auth.default()
+[17]   File "C:\Users\Joseph Shimonov\AppData\Roaming\Python\Python39\site-packages\google\auth\_default.py", line 464, in default
+[18]     credentials, project_id = checker()
+[19]   File "C:\Users\Joseph Shimonov\AppData\Roaming\Python\Python39\site-packages\google\auth\_default.py", line 457, in <lambda>
+[20]     lambda: _get_explicit_environ_credentials(quota_project_id=quota_project_id),
+[21]   File "C:\Users\Joseph Shimonov\AppData\Roaming\Python\Python39\site-packages\google\auth\_default.py", line 226, in _get_explicit_environ_credentials
+[22]     credentials, project_id = load_credentials_from_file(
+[23]   File "C:\Users\Joseph Shimonov\AppData\Roaming\Python\Python39\site-packages\google\auth\_default.py", line 110, in load_credentials_from_file
+[24]     raise exceptions.DefaultCredentialsError(
+[25] google.auth.exceptions.DefaultCredentialsError: File gs:\speech-to-text-media-scribes\client_service_key.json was not found.

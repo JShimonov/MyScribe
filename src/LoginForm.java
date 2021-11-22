@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.lang.Exception;
 import java.util.Arrays;
+import java.io.File;
+
 
 class CreateLoginForm extends JFrame implements ActionListener {
 
@@ -45,9 +47,13 @@ class CreateLoginForm extends JFrame implements ActionListener {
         add(newPanel, BorderLayout.CENTER);
 
         //perform action on button click
-        b1.addActionListener(this);     //add action listener to button
-        setTitle("LOGIN FORM");         //set title to the login form
+        b1.addActionListener(this);         //add action listener to button
+        setTitle("LOGIN FORM");               //set title to the login form
 
+        this.setPreferredSize(new Dimension(500, 200));
+
+        this.pack();
+        this.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent ae) {
@@ -92,12 +98,21 @@ class CreateLoginForm extends JFrame implements ActionListener {
 // create the main class
 public class LoginForm {
     public static void main (String[] args) {
-        try {
-            CreateLoginForm login = new CreateLoginForm();
-            login.setSize(300, 100);
-            login.setVisible(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+
+        // Singleton x = Singleton.getInstance();
+        // System.out.println(x.hashCode());
+
+        // Singleton y = Singleton.getInstance();
+        // System.out.println(y.hashCode());
+
+        // Singleton z = Singleton.getInstance();
+        // System.out.println(z.hashCode());
+
+        // String file = "file_upload";
+        // File upload = x.execute(file);
+        // System.out.println(upload);
+        // Singleton a = Singleton.getInstance();
+        // System.out.println(a.execute(file));
+
     }
 }
