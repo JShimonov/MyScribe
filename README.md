@@ -10,5 +10,3 @@ This is where MyScribe steps in. With this app, you'll be able to upload your le
 * GCS
   *   Speech-to-text
   *   Storage
-
-In the future iterations of this application, we hope to implement Natural Language Processing to pin-point important moments in a lecture
