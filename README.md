@@ -6,6 +6,7 @@ This is where MyScribe steps in. With this app, you'll be able to upload your le
 * These features are currently being implemented
 
 ## Tech Stack
+* Java
 * Python
 * GCS
   *   Speech-to-text
