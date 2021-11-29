@@ -63,21 +63,30 @@ public class Driver {
         System.out.println("Please enter a username:");
         System.out.print("scribe > ");
         input = scan.nextLine();
-        // should check if username exists but nah
         System.out.println(buffer);
 
         while (!done) {
             System.out.println("Password needs to have the following:");
-            System.out.println("  - One lowercase letter");
-            System.out.println("  - One uppercase letter");
-            System.out.println("  - One number");
-            System.out.println("  - etc");
+            System.out.println("  - 8 or more characters");
+            System.out.println("  - One or more lowercase letters");
+            System.out.println("  - One or more uppercase letters");
+            System.out.println("  - One or more numbers");
+            System.out.println("  - One or more of these characters: !%&^$");
+            System.out.println("  - No spaces");
             System.out.println("Please enter a password:");
             System.out.print("scribe > ");
             input = scan.nextLine();
-
             // -----INTERPRETER PATTERN HERE--------------------
             System.out.println("Interpreter Pattern here...");
+            String potentialPassword = input;
+            Password p = new Password();
+            if (p.setPassword(potentialPassword) == false){
+                while(p.getPassword() == null){
+                    System.out.print("Try again: enter password: ");
+                    potentialPassword = scan.nextLine();
+                    p.setPassword(potentialPassword);
+                }
+            }
             done = true;
 
             System.out.println(buffer);
