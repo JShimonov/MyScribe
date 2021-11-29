@@ -57,11 +57,6 @@ public class Singleton {
         return file;
     }
 
-    public boolean checkDir(File file) {
-        // iterate over the transcribed dir and check if the url already exists
-        return false;
-    }
-
 }
 
 
