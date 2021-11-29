@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project_cs370;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -15,7 +15,9 @@ import java.util.Arrays;
  */
 public class NameRepository {
 
-    File directory = new File("C:\\Users\\zarif\\OneDrive\\Desktop\\ProjectFolder");
+    URL url = getClass().getResource("transcribed");
+    File directory = new File(url.getPath());
+    // File directory = new File("C:\\Users\\zarif\\OneDrive\\Desktop\\ProjectFolder");
     ArrayList<File> files1 = new ArrayList<File>(Arrays.asList(directory.listFiles()));
     int fileLength = files1.size();
 

@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 import java.lang.Thread;
 import java.lang.String;
@@ -7,16 +8,16 @@ public class Driver {
     static String buffer = "----------------------------------------------------------------------";
     static Scanner scan = new Scanner(System.in);
     static String input;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // -----OBSERVER PATTERN HERE--------------------
         System.out.println("Observer Pattern here...");
 
         // pauses for 3s to simulate loading
-        try {
-            Thread.sleep(3000);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        // try {
+        //     Thread.sleep(3000);
+        // } catch (Exception e) {
+        //     System.out.println(e);
+        // }
 
         boolean done = false;
 
@@ -162,9 +163,17 @@ public class Driver {
             // -----ITERATOR PATTERN HERE--------------------
             System.out.println("Iterator Pattern here...");
 
+            MyTranscriptions transcriptions = new MyTranscriptions();
+            try {
+                transcriptions.readText();
+            } catch (IOException e) {
+                return;
+            }
+            
+
             // filler
-            System.out.println("(1) audio.txt");
-            System.out.println("(2) audio2.txt");
+            // System.out.println("(1) audio.txt");
+            // System.out.println("(2) audio2.txt");
             System.out.println("(G)o back");
             System.out.print("scribe > ");
             input = scan.nextLine();
