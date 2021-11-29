@@ -122,6 +122,9 @@ public class Driver {
             System.out.println(buffer);
 
             // Add file validation
+            Singleton x = Singleton.getInstance();
+            File audio = new File(input);
+            File toText = x.execute(audio);
             // -----SINGLETON PATTERN HERE--------------------
             System.out.println("Singleton Pattern here...");
 
@@ -179,10 +182,10 @@ public class Driver {
 
             // filler
             System.out.println("Audio playing...");
-            System.out.println("00:00 - vksnerg");
-            System.out.println("00:10 - egndskvn");
-            System.out.println("00:22 - ksdgnskn");
-            System.out.println("etc");
+            // System.out.println("00:00 - vksnerg");
+            // System.out.println("00:10 - egndskvn");
+            // System.out.println("00:22 - ksdgnskn");
+            // System.out.println("etc");
             System.out.println(buffer);
 
             System.out.println("Enter time to skip to:");
