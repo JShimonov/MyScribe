@@ -130,12 +130,11 @@ public class Driver {
             input = scan.nextLine();
             System.out.println(buffer);
 
-            // Add file validation
+            // -----SINGLETON PATTERN HERE--------------------
+            System.out.println("Singleton Pattern here...");
             Singleton x = Singleton.getInstance();
             File audio = new File(input);
             File toText = x.execute(audio);
-            // -----SINGLETON PATTERN HERE--------------------
-            System.out.println("Singleton Pattern here...");
 
             done = true;
         } 
