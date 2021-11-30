@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Singleton {
-    private static Singleton single_instance;
+    private static Singleton singleInstance;
 
     private Singleton() {
     }
 
     public static Singleton getInstance() {
-        if (single_instance == null) {
-            single_instance = new Singleton();
+        if (singleInstance == null) {
+            singleInstance = new Singleton();
         }
-        return single_instance;
+        return singleInstance;
     }
 
     public File execute(File file) {
