@@ -8,7 +8,14 @@ public class Driver {
     static Scanner scan = new Scanner(System.in);
     static String input;
     public static void main(String[] args) {
-        // -----OBSERVER PATTERN HERE--------------------
+        Server s1 = new Server(); // create server on which myscribe will be running on
+
+        Application myscribe = new Application(); // create the application myscribe for the connection
+
+        myscribe.attach(s1); //  myscribe will update the connection to server
+
+        myscribe.notifyUpdate(new Message("application has conected to server"));
+
         System.out.println("Observer Pattern here...");
 
         // pauses for 3s to simulate loading
@@ -34,6 +41,9 @@ public class Driver {
             } else if (input.equals("L")) {
                 logIn();
             } else if (input.equals("E")) {
+                myscribe.detach(s1); // once we are done with mysribe it will now disconnect
+                myscribe.attach(s1); // application has now updated the disconection from the server
+                myscribe.notifyUpdate(new Message("application has disconnected from server"));
                 done = true;
             } else {
                 System.out.println("Please enter a valid response!");
