@@ -1,10 +1,7 @@
 import java.io.File;
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Arrays;
-=======
 import java.io.IOException;
->>>>>>> zarif
 import java.util.Scanner;
 import java.lang.Thread;
 import java.lang.String;
@@ -13,7 +10,6 @@ public class Driver {
     static String buffer = "----------------------------------------------------------------------";
     static Scanner scan = new Scanner(System.in);
     static String input;
-<<<<<<< HEAD
     public static void main(String[] args) {
         Server s1 = new Server(); // create server on which myscribe will be running on
 
@@ -33,19 +29,6 @@ public class Driver {
         }
         //in case the user opts to log in instead of sign up -- here are default credentials
         ArrayList<String> credentials = new ArrayList<>(Arrays.asList("user", "Default1%"));
-=======
-    public static void main(String[] args) throws Exception {
-        // -----OBSERVER PATTERN HERE--------------------
-        System.out.println("Observer Pattern here...");
-
-        // pauses for 3s to simulate loading
-        // try {
-        //     Thread.sleep(3000);
-        // } catch (Exception e) {
-        //     System.out.println(e);
-        // }
-
->>>>>>> zarif
         boolean done = false;
 
         while (!done) {
