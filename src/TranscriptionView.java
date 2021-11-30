@@ -15,9 +15,13 @@ public class TranscriptionView {
         else return false;
     }
 
-    public void jump(JumpStrategy j, String input) {
-        j.jumpTo(input);
+    public Thread play(PlayStrategy p, String input) {
+        return p.playFrom(input);
     }
+
+    // public void printTranscript() {
+    //     PrintTranscript print = new PrintTranscript(p);
+    // }
 
     
 }

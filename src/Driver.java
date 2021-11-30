@@ -178,6 +178,9 @@ public class Driver {
     // file parameter?
     static void load() {
         boolean done = false;
+        boolean first = true;
+        TranscriptionView tView = new TranscriptionView(input);
+        Thread player = tView.play(new PlayFromBeginning(), input);
 
         while (!done) {
             // -----STRATEGY PATTERN HERE--------------------
@@ -198,28 +201,47 @@ public class Driver {
             System.out.println("(M)odify file");
             System.out.println("(S)ave and Exit");
             System.out.println("(E)xit");
-            System.out.print("scribe > ");
+            System.out.print(buffer);
+
+            if (first) {
+                player.start();
+            }
             input = scan.nextLine();
-            System.out.println(buffer);
-        
-            TranscriptionView tView = new TranscriptionView(input);
-            PrintTranscript printer = new PrintTranscript(input);
-            printer.start();
+            
+            // PrintTranscript printer = new PrintTranscript(input);
+            // printer.start();
 
             if (input.equals("B")) {
-                tView.jump(new JumpToBeginning(), input);
+                player.interrupt();
+                player = tView.play(new PlayFromBeginning(), input);
+                player.start();
             } else if (tView.isTime(input)) {
-                tView.jump(new JumpToTime(), input);
+                player.interrupt();
+                player = tView.play(new PlayFromTime(), input);
+                player.start();
             } else if (input.equals("M")) {
+                player.interrupt();
                 modify();
             } else if (input.equals("S")) {
+                player.interrupt();
                 save();
                 done = true;
             } else if (input.equals("E")) {
+                player.interrupt();
                 done = true;
             } else {
                 System.out.println("Please enter a valid response!");
             }
+
+            first = false;
+            System.out.println(buffer);
+
+            try {
+                Thread.sleep(500);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
         } 
 
     } 
