@@ -2,6 +2,11 @@ import java.io.File;
 import java.util.Scanner;
 import java.lang.Thread;
 import java.lang.String;
+import java.net.URL;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
 
 public class Driver {
     static String buffer = "----------------------------------------------------------------------";
@@ -12,11 +17,11 @@ public class Driver {
         System.out.println("Observer Pattern here...");
 
         // pauses for 3s to simulate loading
-        try {
-            Thread.sleep(3000);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        // try {
+        //     Thread.sleep(3000);
+        // } catch (Exception e) {
+        //     System.out.println(e);
+        // }
 
         boolean done = false;
 
@@ -44,17 +49,6 @@ public class Driver {
         System.out.println("Scribe says goodbye!");
         System.out.println(buffer);
 
-
-
-        // System.out.print("Enter username: ");
-        // System.out.println("Username is: " + userName);
-
-        // Singleton x = Singleton.getInstance();
-        // File audio = new File("src\\audio\\steve_test.mp3");
-        // File toText = x.execute(audio);
-
-        // MediaView mv = new MediaView();
-        // mv.jump(new JumpToTime());
     }
 
     static void signUp() {
@@ -131,9 +125,9 @@ public class Driver {
             System.out.println(buffer);
 
             // Add file validation
-            Singleton x = Singleton.getInstance();
-            File audio = new File(input);
-            File toText = x.execute(audio);
+            // Singleton x = Singleton.getInstance();
+            // File audio = new File(input);
+            // File toText = x.execute(audio);
             // -----SINGLETON PATTERN HERE--------------------
             System.out.println("Singleton Pattern here...");
 
@@ -144,11 +138,11 @@ public class Driver {
         System.out.println(buffer);
 
         // pauses for 3s to simulate loading
-        try {
-            Thread.sleep(3000);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        // try {
+        //     Thread.sleep(3000);
+        // } catch (Exception e) {
+        //     System.out.println(e);
+        // }
 
         System.out.println("Transcription done!");
 
@@ -208,10 +202,14 @@ public class Driver {
             input = scan.nextLine();
             System.out.println(buffer);
         
+            TranscriptionView tView = new TranscriptionView(input);
+            tView.printTranscript();
+            done = true;
+
             if (input.equals("B")) {
-                
-            } else if (input.equals("XX:XX")) {
-                
+                tView.jump(new JumpToBeginning(), input);
+            } else if (tView.isTime(input)) {
+                tView.jump(new JumpToTime(), input);
             } else if (input.equals("M")) {
                 modify();
             } else if (input.equals("S")) {
@@ -245,5 +243,60 @@ public class Driver {
             done = true;
         } 
     } 
+
+    public void printTranscript() {
+        File file = new File("steve_test.txt");
+
+        FileReader fr = null;
+        try {
+            fr = new FileReader(file);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found!");
+        }
+        
+        BufferedReader br = new BufferedReader(fr);
+
+        Thread thread = new Thread() {
+            public void run() {
+                String line;
+                // System.out.println("Thread Running");
+                int seconds = -1;
+
+                try {
+                    while((line = br.readLine()) != null) {
+                        //process the line
+                        String[] lineContents = line.split(" ", 4);
+                        String[] lineTime = lineContents[3].split(":", 3);
+                        int lineSeconds = Character.getNumericValue(lineTime[2].charAt(1));
+                        String displaySeconds = "[" + lineTime[1] + ":" + lineTime[2].substring(0,2) + "]";
+
+
+                        if (lineSeconds == seconds%10) {
+                            System.out.print(" " + lineContents[1]);
+                        } else {
+                            seconds++;
+                            try {
+                                sleep(1000);
+                            } catch (Exception e) {
+                                System.out.println(e);
+                            }
+
+                            System.out.print("\n" + displaySeconds + " " + lineContents[1]);
+                        }
+
+                        // seconds = seconds % 60;
+                        
+                    }
+                } catch (IOException e) {
+                    System.out.println("Print transcript error");
+                }
+            }
+        };
+        
+        thread.start();
+        // thread.interrupt();
+        
+    
+    }
 
 }

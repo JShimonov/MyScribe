@@ -3,7 +3,9 @@ public class JumpToTime implements JumpStrategy {
         
     }
 
-    public void jumpTo(int time) {
-        System.out.println("time: " + time);
+    public void jumpTo(String input) {
+        int time = Integer.parseInt(input.replace(":", ""));
+
+        // System.out.println("time: " + time);
     }
 }

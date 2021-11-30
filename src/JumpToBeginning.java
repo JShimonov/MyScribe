@@ -3,7 +3,7 @@ public class JumpToBeginning implements JumpStrategy {
         
     }
 
-    public void jumpTo(int time) {
-        System.out.println("beginning: " + time);
+    public void jumpTo(String input) {
+        int time = 0000;
     }
 }

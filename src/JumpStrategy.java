@@ -1,3 +1,3 @@
 public interface JumpStrategy {
-    public void jumpTo(int time);
+    public void jumpTo(String input);
 }
