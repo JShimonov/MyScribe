@@ -27,7 +27,7 @@ public class MyTranscriptions extends NameRepository {
        
         
         while (iter.hasNext()) {//it will check if there are any file in the directory.
-
+        
             try {
                 File file1 = (File) iter.next();//It will return the index of the file to file1
                 // System.out.println("Name : " + file1);

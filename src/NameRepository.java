@@ -34,7 +34,7 @@ public class NameRepository {
 
         public boolean hasNext() {
 
-            if (index < files1.size()) {
+            if (index <= files1.size()) {
                 return true;
             }
             return false;
