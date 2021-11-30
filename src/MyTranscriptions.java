@@ -22,7 +22,7 @@ public class MyTranscriptions extends NameRepository {
     }
     Iterator iter = getIterator();
     String text = " ";
-     int i = 0;
+    int i = 0;
     public void  readText() throws IOException {
        
         

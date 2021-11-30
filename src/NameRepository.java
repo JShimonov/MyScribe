@@ -15,8 +15,9 @@ import java.util.Arrays;
  */
 public class NameRepository {
 
-    URL url = getClass().getResource("transcribed");
-    File directory = new File(url.getPath());
+    //URL url = getClass().getResource("transcribed");
+    //File directory = new File(url.getPath());
+    File directory = new File("src\\transcribed");
     // File directory = new File("C:\\Users\\zarif\\OneDrive\\Desktop\\ProjectFolder");
     ArrayList<File> files1 = new ArrayList<File>(Arrays.asList(directory.listFiles()));
     int fileLength = files1.size();
