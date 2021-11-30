@@ -203,7 +203,7 @@ public class Driver {
             System.out.println(buffer);
         
             TranscriptionView tView = new TranscriptionView(input);
-            tView.printTranscript();
+            printTranscript();
             done = true;
 
             if (input.equals("B")) {
@@ -244,64 +244,91 @@ public class Driver {
         } 
     } 
 
-    public void printTranscript() {
-        // File file = new File("steve_test.txt");
+    static void printTranscript() {
+        File file = new File("steve_test.txt");
 
-        // FileReader fr = null;
-        // try {
-        //     fr = new FileReader(file);
-        // } catch (FileNotFoundException e) {
-        //     System.out.println("File not found!");
-        // }
+        FileReader fr = null;
+        try {
+            fr = new FileReader(file);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found!");
+        }
         
-        // BufferedReader br = new BufferedReader(fr);
+        BufferedReader br = new BufferedReader(fr);
 
-        String path = "src\\transcribed\\steve_test.txt";
-        BufferedReader br = new BufferedReader(new FileReader(path));
-        StringBuilder sb = new StringBuilder();
-        String line = br.readLine();
+        // String path = "src\\transcribed\\steve_test.txt";
+        // BufferedReader br = new BufferedReader(new FileReader(path));
+        // StringBuilder sb = new StringBuilder();
+        // String line = br.readLine();
 
         Thread thread = new Thread() {
+
             public void run() {
                 String line;
-                // System.out.println("Thread Running");
-                int seconds = -1;
-
                 try {
-                    while((line = br.readLine()) != null) {
-                        //process the line
-                        String[] lineContents = line.split(" ", 4);
-                        String[] lineTime = lineContents[3].split(":", 3);
-                        int lineSeconds = Character.getNumericValue(lineTime[2].charAt(1));
-                        String displaySeconds = "[" + lineTime[1] + ":" + lineTime[2].substring(0,2) + "]";
+                    line = br.readLine();
+                } catch (IOException e) {
+                    return;
+                }
 
+                int seconds = -1;
+                int spaceLength = 30;
+                boolean printing = true;
 
-                        if (lineSeconds == seconds%10) {
-                            System.out.print(" " + lineContents[1]);
-                        } else {
-                            seconds++;
-                            try {
-                                sleep(1000);
-                            } catch (Exception e) {
-                                System.out.println(e);
-                            }
-
-                            System.out.print("\n" + displaySeconds + " " + lineContents[1]);
+                while (printing) {
+                    String[] lineContents = line.split(" ", 4);
+                    String[] lineTime = lineContents[3].split(":", 3);
+                    int lineSeconds = Character.getNumericValue(lineTime[2].charAt(1));
+                    String displaySeconds = "[" + lineTime[1] + ":" + lineTime[2].substring(0,2) + "]";
+                    // String displayString = "";
+                    
+                    if (lineSeconds == seconds%10) {
+                        System.out.print(" " + lineContents[1]);
+                        spaceLength = (spaceLength - lineContents[1].length() - 1);
+                    } else {
+                        // displayString = "\n" + displaySeconds + " " + lineContents[1];
+                        if (seconds != -1) {
+                            for (int i = 0; i < spaceLength; i++) 
+                                System.out.print(" ");
+                            System.out.print("scribe > ");
                         }
 
-                        // seconds = seconds % 60;
-                        
+                        spaceLength = 30;
+                        seconds++;
+
+                        try {
+                            sleep(1000);
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+
+                        System.out.print("\n" + displaySeconds + " " + lineContents[1]);
+                        spaceLength = (spaceLength - lineContents[1].length() - 1);
                     }
-                } catch (IOException e) {
-                    System.out.println("Print transcript error");
+
+                    // displayString = "\n" + displaySeconds + " " + lineContents[1];
+                    // for (int i = 0; i < 45-displayString.length(); i++) 
+                    //     displayString = displayString + " ";
+                    // System.out.print(displayString + "scribe >");
+
+                    try {
+                        line = br.readLine();
+                    } catch (IOException e) {
+                        return;
+                    }
+                    if (line.split(" ", 4).length != 4) printing = false;
+                    
+                }
+                if (seconds != -1) {
+                    for (int i = 0; i < spaceLength; i++) 
+                        System.out.print(" ");
+                    System.out.print("scribe > ");
                 }
             }
         };
         
         thread.start();
         // thread.interrupt();
-        
-    
     }
 
 }
