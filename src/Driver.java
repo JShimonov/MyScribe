@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.IOException;
-=======
->>>>>>> kristof2
 import java.util.Scanner;
 import java.lang.Thread;
 import java.lang.String;
