@@ -245,16 +245,21 @@ public class Driver {
     } 
 
     public void printTranscript() {
-        File file = new File("steve_test.txt");
+        // File file = new File("steve_test.txt");
 
-        FileReader fr = null;
-        try {
-            fr = new FileReader(file);
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
-        }
+        // FileReader fr = null;
+        // try {
+        //     fr = new FileReader(file);
+        // } catch (FileNotFoundException e) {
+        //     System.out.println("File not found!");
+        // }
         
-        BufferedReader br = new BufferedReader(fr);
+        // BufferedReader br = new BufferedReader(fr);
+
+        String path = "src\\transcribed\\steve_test.txt";
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        StringBuilder sb = new StringBuilder();
+        String line = br.readLine();
 
         Thread thread = new Thread() {
             public void run() {
