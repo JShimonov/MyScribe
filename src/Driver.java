@@ -17,6 +17,8 @@ public class Driver {
     static String buffer = "----------------------------------------------------------------------";
     static Scanner scan = new Scanner(System.in);
     static String input;
+    // create a File variable that wil store transcription
+    static File toText = new File("src\\transcribed\\test.txt");
     public static void main(String[] args) {
         Server s1 = new Server(); // create server on which myscribe will be running on
 
@@ -27,6 +29,8 @@ public class Driver {
         myscribe.notifyUpdate(new Message("application has conected to server"));
 
         System.out.println("Observer Pattern here...");
+
+        
 
         // pauses for 3s to simulate loading
         // try {
@@ -161,10 +165,10 @@ public class Driver {
             System.out.println(buffer);
 
             // -----SINGLETON PATTERN HERE--------------------
-            // System.out.println("Singleton Pattern here...");
-            // Singleton x = Singleton.getInstance();
-            // File audio = new File(input);
-            // File toText = x.execute(audio);
+            System.out.println("Singleton Pattern here...");
+            Singleton x = Singleton.getInstance();
+            File audio = new File(input);
+            toText = x.execute(audio);
 
             done = true;
         } 
@@ -223,7 +227,7 @@ public class Driver {
         boolean done = false;
         boolean first = true;
         TranscriptionView tView = new TranscriptionView(input);
-        Thread player = tView.play(new PlayFromBeginning(), input);
+        Thread player = tView.play(new PlayFromBeginning(), toText);
 
         while (!done) {
             System.out.println("Enter time to skip to:");
@@ -234,7 +238,7 @@ public class Driver {
             System.out.println("(S)ave and Exit");
             System.out.println("(E)xit");
             System.out.println(buffer);
-            System.out.print("scribe > ");
+            
 
             if (first) {
                 System.out.println("\nStrategy Pattern here...");
@@ -243,8 +247,9 @@ public class Driver {
 
                 player.start();
             }
-            input = scan.nextLine();
             
+            System.out.print("scribe > ");
+            input = scan.nextLine();
             // PrintTranscript printer = new PrintTranscript(input);
             // printer.start();
 
@@ -255,7 +260,7 @@ public class Driver {
                 System.out.print(buffer);
 
                 player.interrupt();
-                player = tView.play(new PlayFromBeginning(), input);
+                player = tView.play(new PlayFromBeginning(), toText);
                 player.start();
             } else if (tView.isTime(input)) {
                 System.out.println("\nStrategy Pattern here...");
@@ -263,7 +268,7 @@ public class Driver {
                 System.out.print(buffer);
 
                 player.interrupt();
-                player = tView.play(new PlayFromTime(), input);
+                player = tView.play(new PlayFromTime(), toText);
                 player.start();
             } else if (input.equals("M")) {
                 player.interrupt();
@@ -310,6 +315,7 @@ public class Driver {
 	    	System.out.println("(2) Load- Restore a Memento State.");
 	    	System.out.println("(3) Edit- Edit Transcript.");
 	    	System.out.println("(4) Exit.");
+            System.out.print("scribe > ");
 	    	input = scan.nextLine();
 	    	
             // takes text from transcript file and puts into a string, then adds it to arraylist as memento state

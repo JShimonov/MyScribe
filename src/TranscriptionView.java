@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.regex.*;
 
 
@@ -15,7 +16,7 @@ public class TranscriptionView {
         else return false;
     }
 
-    public Thread play(PlayStrategy p, String input) {
+    public Thread play(PlayStrategy p, File input) {
         return p.playFrom(input);
     }
 

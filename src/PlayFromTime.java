@@ -10,12 +10,12 @@ public class PlayFromTime implements PlayStrategy {
 
     }
 
-    private void readFile(String f) {
-        File file = new File(f);
+    private void readFile(File f) {
+        //File file = new File(f);
 
         FileReader fr = null;
         try {
-            fr = new FileReader(file);
+            fr = new FileReader(f);
         } catch (Exception e) {
             System.out.println("File not found!");
         }
@@ -28,8 +28,8 @@ public class PlayFromTime implements PlayStrategy {
         // String line = br.readLine();
     }
 
-    public Thread playFrom(String input) {
-        readFile("steve_test.txt");
+    public Thread playFrom(File input) {
+        readFile(input);
         String time = "(" + input + ")";
 
         thread = new Thread() {

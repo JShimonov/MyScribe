@@ -1,3 +1,5 @@
+import java.io.File;
+
 public interface PlayStrategy {
-    public Thread playFrom(String input);
+    public Thread playFrom(File input);
 }

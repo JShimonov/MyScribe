@@ -41,7 +41,7 @@ public class Singleton {
                 writer.write("[" + i + "] " + line + "\n");
 
                 // Option 2
-                System.out.println("[" + i++ + "] Read: " + line);
+                //System.out.println("[" + i++ + "] Read: " + line);
             }
             reader.close();
             writer.close();
