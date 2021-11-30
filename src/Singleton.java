@@ -36,15 +36,11 @@ public class Singleton {
 
             int i = 0;
             String line;
-            ArrayList<String> lines = new ArrayList<>();
             while ((line = reader.readLine()) != null) {
                 // Option 1
-                lines.add(line);
-
-                // Option 2
                 writer.write("[" + i + "] " + line + "\n");
 
-                // Option 3
+                // Option 2
                 System.out.println("[" + i++ + "] Read: " + line);
             }
             reader.close();
