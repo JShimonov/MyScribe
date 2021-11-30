@@ -1,7 +1,14 @@
-import java.io.File;
 import java.util.Scanner;
 import java.lang.Thread;
 import java.lang.String;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.File;
+
 
 public class Driver {
     static String buffer = "----------------------------------------------------------------------";
@@ -218,6 +225,76 @@ public class Driver {
         // -----MEMENTO PATTERN HERE--------------------
         System.out.println("Memento Pattern here...");
         System.out.println(buffer);
+        List<Memento.ScribeMemento> savedStateList = new ArrayList<Memento.ScribeMemento>();
+		String transcriptString = "";
+		Memento originator = new Memento();
+	    boolean done = false;
+        String path = "src\\transcribed\\steve_test.txt";
+	    while(!done) {
+	    	System.out.println("Memento Pattern here...");
+	    	System.out.println("(1) Save- Create a Memento State.");
+	    	System.out.println("(2) Load- Restore a Memento State.");
+	    	System.out.println("(3) Edit- Edit Transcript.");
+	    	System.out.println("(4) Exit.");
+	    	input = scan.nextLine();
+	    	
+            // takes text from transcript file and puts into a string, then adds it to arraylist as memento state
+	    	if (input.equals("1")) {
+	    	    try {
+                    
+	    	        BufferedReader br = new BufferedReader(new FileReader(path));
+	    	        StringBuilder sb = new StringBuilder();
+	    	        String line = br.readLine();
+	    	        while (line != null) {
+	    	            sb.append(line);
+	    	            sb.append("\n");
+	    	            line = br.readLine();
+	    	        }
+	    	        transcriptString = sb.toString();
+	    	        br.close();
+	    	    } catch (Exception e) {
+	    	        e.printStackTrace();
+	    	    }
+	    	    originator.set(transcriptString);
+	    		savedStateList.add(originator.createScribeMemento());
+	    	}
+	    	
+            // takes string from a saved memento state and saves it onto the transcript text file
+	    	else if (input.equals("2")) {
+	    		transcriptString = originator.restoreScribeMemento(savedStateList.get(savedStateList.size()-1));
+	    		try {
+	    		FileWriter transcriptEditor = new FileWriter(path); 
+	    		transcriptEditor.write(transcriptString);
+	    		transcriptEditor.close();
+	    		}
+	    		catch(IOException e){
+	    			System.out.println("an error occured while restoring memento");
+	    			e.printStackTrace();
+	    		}
+	    	}
+	    	
+            // placeholder code to "edit" the transcript text file
+	    	else if (input.equals("3")) {
+	    		System.out.println("\nPlaceholder to edit the transcript text file");
+	    		try {
+	    		FileWriter transcriptEditor = new FileWriter(path); 
+	    		transcriptEditor.write("Placeholder to edit the transcript text file");
+	    		transcriptEditor.close();
+	    		}
+	    		catch(IOException e){
+	    			System.out.println("an error occured while restoring memento");
+	    			e.printStackTrace();
+	    		}
+	    	}
+	    	
+	    	else if (input.equals("4")) {
+	    		done = true;
+	    	}
+	    	
+	    	else {
+	    		System.out.println("Please enter a valid response!");
+	    	}
+	    }
     } 
 
     static void save() {
