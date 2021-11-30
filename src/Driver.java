@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.List;
 import java.net.URL;
+import java.io.FileNotFoundException;
 
 
 public class Driver {
@@ -64,17 +65,6 @@ public class Driver {
         System.out.println("Scribe says goodbye!");
         System.out.println(buffer);
 
-
-
-        // System.out.print("Enter username: ");
-        // System.out.println("Username is: " + userName);
-
-        // Singleton x = Singleton.getInstance();
-        // File audio = new File("src\\audio\\steve_test.mp3");
-        // File toText = x.execute(audio);
-
-        // MediaView mv = new MediaView();
-        // mv.jump(new JumpToTime());
     }
 
     static ArrayList<String> signUp() {
@@ -171,10 +161,10 @@ public class Driver {
             System.out.println(buffer);
 
             // -----SINGLETON PATTERN HERE--------------------
-            System.out.println("Singleton Pattern here...");
-            Singleton x = Singleton.getInstance();
-            File audio = new File(input);
-            File toText = x.execute(audio);
+            // System.out.println("Singleton Pattern here...");
+            // Singleton x = Singleton.getInstance();
+            // File audio = new File(input);
+            // File toText = x.execute(audio);
 
             done = true;
         } 
@@ -231,19 +221,11 @@ public class Driver {
     // file parameter?
     static void load() {
         boolean done = false;
+        boolean first = true;
+        TranscriptionView tView = new TranscriptionView(input);
+        Thread player = tView.play(new PlayFromBeginning(), input);
 
         while (!done) {
-            // -----STRATEGY PATTERN HERE--------------------
-            System.out.println("Strategy Pattern here...");
-
-            // filler
-            System.out.println("Audio playing...");
-            // System.out.println("00:00 - vksnerg");
-            // System.out.println("00:10 - egndskvn");
-            // System.out.println("00:22 - ksdgnskn");
-            // System.out.println("etc");
-            System.out.println(buffer);
-
             System.out.println("Enter time to skip to:");
             System.out.println("(B)eginning");
             System.out.println("(MM:SS) Where M is minute and S is second");
@@ -251,24 +233,61 @@ public class Driver {
             System.out.println("(M)odify file");
             System.out.println("(S)ave and Exit");
             System.out.println("(E)xit");
-            System.out.print("scribe > ");
-            input = scan.nextLine();
             System.out.println(buffer);
-        
+            System.out.print("scribe > ");
+
+            if (first) {
+                System.out.println("\nStrategy Pattern here...");
+                System.out.println("Audio playing...");
+                System.out.print(buffer);
+
+                player.start();
+            }
+            input = scan.nextLine();
+            
+            // PrintTranscript printer = new PrintTranscript(input);
+            // printer.start();
+
             if (input.equals("B")) {
-                
-            } else if (input.equals("XX:XX")) {
-                
+                // -----STRATEGY PATTERN HERE--------------------
+                System.out.println("\nStrategy Pattern here...");
+                System.out.println("Audio playing...");
+                System.out.print(buffer);
+
+                player.interrupt();
+                player = tView.play(new PlayFromBeginning(), input);
+                player.start();
+            } else if (tView.isTime(input)) {
+                System.out.println("\nStrategy Pattern here...");
+                System.out.println("Audio playing...");
+                System.out.print(buffer);
+
+                player.interrupt();
+                player = tView.play(new PlayFromTime(), input);
+                player.start();
             } else if (input.equals("M")) {
+                player.interrupt();
                 modify();
             } else if (input.equals("S")) {
+                player.interrupt();
                 save();
                 done = true;
             } else if (input.equals("E")) {
+                player.interrupt();
                 done = true;
             } else {
                 System.out.println("Please enter a valid response!");
             }
+
+            first = false;
+            System.out.println(buffer);
+
+            try {
+                Thread.sleep(500);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
         } 
 
     } 
