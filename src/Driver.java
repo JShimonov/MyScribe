@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
+import java.net.URL;
 
 
 public class Driver {
@@ -30,11 +31,11 @@ public class Driver {
         System.out.println("Observer Pattern here...");
 
         // pauses for 3s to simulate loading
-        try {
-            Thread.sleep(3000);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        // try {
+        //     Thread.sleep(3000);
+        // } catch (Exception e) {
+        //     System.out.println(e);
+        // }
         //in case the user opts to log in instead of sign up -- here are default credentials
         ArrayList<String> credentials = new ArrayList<>(Arrays.asList("user", "Default1%"));
         boolean done = false;
@@ -173,9 +174,9 @@ public class Driver {
             System.out.println(buffer);
 
             // Add file validation
-            Singleton x = Singleton.getInstance();
-            File audio = new File(input);
-            File toText = x.execute(audio);
+            // Singleton x = Singleton.getInstance();
+            // File audio = new File(input);
+            // File toText = x.execute(audio);
             // -----SINGLETON PATTERN HERE--------------------
             System.out.println("Singleton Pattern here...");
 
@@ -186,11 +187,11 @@ public class Driver {
         System.out.println(buffer);
 
         // pauses for 3s to simulate loading
-        try {
-            Thread.sleep(3000);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        // try {
+        //     Thread.sleep(3000);
+        // } catch (Exception e) {
+        //     System.out.println(e);
+        // }
 
         System.out.println("Transcription done!");
 
@@ -284,6 +285,9 @@ public class Driver {
 		String transcriptString = "";
 		Memento originator = new Memento();
 	    boolean done = false;
+        // URL url = getClass().getResource("steve_test.txt");
+        // String path = url.getPath();
+        // String path = "src/transcribed/steve_test.txt";
         String path = "src\\transcribed\\steve_test.txt";
 	    while(!done) {
 	    	System.out.println("Memento Pattern here...");
