@@ -102,12 +102,4 @@ public class PlayFromBeginning implements PlayStrategy {
 
         return thread;
     }
-
-    public void slp(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (Exception e) {
-            return;
-        }
-    }
 }
