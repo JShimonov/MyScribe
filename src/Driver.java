@@ -1,4 +1,6 @@
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.lang.Thread;
 import java.lang.String;
@@ -17,7 +19,8 @@ public class Driver {
         } catch (Exception e) {
             System.out.println(e);
         }
-
+        //in case the user opts to log in instead of sign up -- here are default credentials
+        ArrayList<String> credentials = new ArrayList<>(Arrays.asList("user", "Default1%"));
         boolean done = false;
 
         while (!done) {
@@ -30,9 +33,9 @@ public class Driver {
             System.out.println(buffer);
 
             if (input.equals("S")) {
-                signUp();
+                credentials = signUp();
             } else if (input.equals("L")) {
-                logIn();
+                logIn(credentials);
             } else if (input.equals("E")) {
                 done = true;
             } else {
@@ -57,12 +60,14 @@ public class Driver {
         // mv.jump(new JumpToTime());
     }
 
-    static void signUp() {
+    static ArrayList<String> signUp() {
         boolean done = false;
-
+        ArrayList<String> credentials = new ArrayList<>();
         System.out.println("Please enter a username:");
         System.out.print("scribe > ");
         input = scan.nextLine();
+        String username = input;
+        credentials.add(username);
         System.out.println(buffer);
 
         while (!done) {
@@ -87,17 +92,35 @@ public class Driver {
                     p.setPassword(potentialPassword);
                 }
             }
+            credentials.add(potentialPassword);
             done = true;
 
             System.out.println(buffer);
             System.out.println("Account created!");
-        } 
 
+        }
+        return credentials;
     }
 
-    static void logIn() {
+    static void logIn(ArrayList<String> credentials) {
         boolean done = false;
+        System.out.print("\nEnter username: ");
+        String username = credentials.get(0);
+        input = scan.nextLine();
+        while(!username.equals(input)){
+            System.out.print("\nTry again: Enter username: ");
+            input = scan.nextLine();
+        }
+        String password = credentials.get(1);
+        System.out.print("\nEnter password: ");
+        input = scan.nextLine();
 
+        while(!password.equals(input)){
+            System.out.print("\nTry again: Enter password: ");
+            input = scan.nextLine();
+        }
+
+        System.out.println("Welcome, " + username + "!");
         while (!done) {
             System.out.println("Scribe Home");
             System.out.println("(T)ranscribe");
